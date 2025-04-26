@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Styling the page */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Styling the container */
+        .container {
+            width: 300px;
+            border: 2px solid #000;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #f0f0f0;
+        }
+
+        /* Styling the form */
+        .container form {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        /* Styling the input */
+        .container input[type="text"] {
+            width: 70%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        /* Styling the submit button */
+        .container button {
+            width: 25%;
+            padding: 5px;
+            background-color: #007bff;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        /* Styling the list */
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        /* Styling list items */
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0;
+            border-bottom: 1px solid #ccc;
+        }
+
+        /* Styling icons */
+        .icons {
+            display: flex;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        /* Strike-through for completed tasks */
+        .completed {
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>To-Do Lists </h1> <hr>
+        <center> <h5>using local storage:</h5></center>
+       
+        <form id="todoForm">
+            <input type="text" id="todoInput" placeholder="Add a new task">
+            <button type="submit">Add</button>
+        </form>
+        <ul id="todoList"></ul>
+    </div>
+
+    <script>
+        // Initial setup
+        let todos = JSON.parse(localStorage.getItem("todos")) || [];
+        console.log(todos);
+
+        // Function to add a new task to the list
+        const addTask = (task) => {
+            // Create a new list item element
+            const li = document.createElement("li");
+            
+            // Add task text to the list item
+            li.innerHTML = `
+                <span class="task">${task.text}</span>
+                <div class="icons">
+                    <i class="fas fa-check-circle toggle ${task.completed ? 'completed' : ''}"></i>
+                    <i class="fas fa-trash delete"></i>
+                </div>
+            `;
+
+            // Add the event listeners for task actions
+            li.querySelector(".toggle").addEventListener("click", () => {
+                task.completed = !task.completed;
+                li.querySelector(".task").classList.toggle("completed");
+                li.querySelector(".toggle").classList.toggle("completed");
+                saveTasks();
+            });
+            
+            li.querySelector(".delete").addEventListener("click", () => {
+                const index = todos.indexOf(task);
+                todos.splice(index, 1);
+                li.remove();
+                saveTasks();
+            });
+
+            // Add the list item to the task list
+            document.querySelector("#todoList").appendChild(li);
+        };
+
+        // Function to save tasks to local storage
+        const saveTasks = () => {
+            localStorage.setItem("todos", JSON.stringify(todos));
+        };
+
+        // Event listener for form submission
+        document.querySelector("#todoForm").addEventListener("submit", (e) => {
+            e.preventDefault();
+            const input = document.querySelector("#todoInput");
+            const newTask = {
+                text: input.value,
+                completed: false,
+            };
+            
+            // Add the new task to the list and tasks array
+            todos.push(newTask);
+            addTask(newTask);
+            saveTasks();
+
+            // Clear the input field
+            input.value = "";
+        });
+
+        // Load saved tasks on page load
+        todos.forEach(task => addTask(task));
+    </script>
+</body>
+
+</html>

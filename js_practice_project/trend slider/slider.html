@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>slider</title>
+</head>
+<body>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .slider_cont{
+            background-color: rgba(85, 59, 59, 0.621);
+            width: 500px;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .button{
+            height: 100px;
+            width: 100px;
+            position: absolute;
+            bottom: 0;
+        }
+        button{
+            padding: 10px;
+        }
+        .cont{
+            position: absolute;
+            width: 500px;
+            height: 400px;
+            transition: all 1s ease-in-out; 
+        }
+        .cont:nth-child(1){
+            left: 0;
+            background-color: rgb(0, 255, 255);  
+        }
+
+        .cont:nth-child(2){
+            left: 100%;
+            background-color: rgb(0, 64, 255);  
+        }
+        .cont:nth-child(3){
+            left: 200%;
+            background-color: rgb(230, 0, 255);  
+        }
+        .cont:nth-child(4){
+            left: 300%;
+            background-color: rgb(149, 255, 0);
+        }
+
+
+    </style>
+    <div class="slider_cont">
+        <div class="full_div">
+            <div class="cont">
+                jana
+            </div>
+            <div class="cont">
+                sanjana
+            </div>
+            <div class="cont">
+                amma
+            </div>
+            <div class="cont">
+                appa
+            </div>
+        </div>
+
+        <div class="button">
+            <button class="prevBtn" type="button">prev</button>
+            <button class="nextBtn" type="button">nxt</button>
+        </div>
+    </div>
+
+    <script>
+    const slides = document.querySelectorAll(".cont");
+    const nextBtn = document.querySelector(".nextBtn");
+    const prevBtn = document.querySelector(".prevBtn");
+    let counter = 0;
+    nextBtn.addEventListener("click", function () {
+      counter++;
+      carousel();
+    });
+    
+    prevBtn.addEventListener("click", function () {
+      counter--;
+      carousel();
+    });
+    
+    function carousel() {
+    
+      if (counter < slides.length - 1) {
+        nextBtn.style.display = "block";
+      } else {
+        nextBtn.style.display = "none";
+      }
+      if (counter > 0) {
+        prevBtn.style.display = "block";
+      } else {
+        prevBtn.style.display = "none";
+      }
+      slides.forEach(function (slide) {
+        slide.style.transform = `translateX(-${counter * 100}%)`;
+      });
+    }
+    
+    prevBtn.style.display = "none";
+    </script>
+
+</body>
+</html>

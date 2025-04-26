@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>countdown</title>
+</head>
+<body>
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body{
+      height: 100vh;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(img.jpg);
+      background-size: cover;
+      background-repeat: no-repeat;
+      color: whitesmoke;
+      background-position: center;
+      font-size: 1.5rem;
+
+    }
+    .counter{
+     margin-top: 30px;
+      
+    }
+    .box{
+      display: inline-block;
+      margin: 20px;
+      text-align: center;
+    }
+
+
+    
+  </style>
+  <script>
+    setInterval(()=>{
+    const futuredate=new Date(2026,0,1,0,0);
+    const currentdate=new Date();
+    const t=futuredate-currentdate;
+    const days=Math.floor((t/1000/60/60/24));
+    const hours=Math.floor((t/1000/60/60)%24);
+    const min=Math.floor((t/1000/60)%60);
+    const sec=Math.floor((t/1000)%60);
+    const secs=document.getElementById("seconds");
+    secs.innerText=`${sec}`
+    const mins=document.getElementById("minutes");
+    mins.innerText=`${min}`
+    const hrs=document.getElementById("hours");
+    hrs.innerText=`${hours}`
+    const day=document.getElementById("days");
+    day.innerText=`${days}`},1000)
+    
+
+
+
+  </script>
+  <p>countdown To</p>
+  <h2 id="mew">NEXT New Year</h2>
+  <div class="counter">
+      <div class="box">
+        <h2 id="days">00</h2>
+        <small>days</small>
+      </div>
+
+      <div class="box">
+        <h2 id="hours">00</h2>
+        <small>hours</small>
+      </div>
+  
+      <div class="box">
+        <h2 id="minutes">00</h2>
+        <small>minutes</small>
+      </div>
+  
+      <div class="box">
+        <h2 id="seconds">00</h2>
+        <small>seconds</small>
+      </div>
+    </div>
+
+   
+
+     
+  </div>
+  
+</body>
+</html>

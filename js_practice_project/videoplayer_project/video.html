@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Video</title>
+    <script type="module" src="video.js"></script>
+
+    <!-- styles -->
+
+    
+  </head>
+  <body>
+<style>
+  *{
+    padding: 0;
+    margin: 0;
+  }
+    .video-container{
+        height: 90vh;
+        width: 100%;
+        position: relative;
+        z-index: -1;
+        
+    }
+    h1{
+        position: absolute;
+        top: 40%;
+        left: 40%;
+
+        font-size: 50px;
+        color: white;
+        z-index: 1;
+    }
+    button{
+        font-size: 40px;
+        border-radius: 40px;
+        padding: 10px;
+        position: relative;
+        position: absolute;
+        bottom: 10%;
+        left: 5%;
+        z-index: 2;
+
+
+
+
+
+    }
+    .switch{
+        border-radius: 40px;
+        background-color: aqua;
+        width: 125px;
+        height: 65px;
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    span:nth-child(1){
+ margin-right: 30px;
+    }
+    .switch-add{
+      left: 0;
+    }
+    .preloader{
+      height: 100vh;
+      width: 100%;
+      z-index: 4;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+     
+      visibility: visible;
+    }
+    .hide-preload{
+       
+        visibility: hidden;
+    }
+
+
+</style>
+  
+
+     <!-- preloader -->
+   <div class="preloader">
+       <div class="jack "></div>
+    </div>
+    <!-- header -->
+    <header>
+      <video controls muted autoplay loop class="video-container">
+        <source src="./video.mp4" />
+      </video>
+      <h1>video project</h1>
+      <!-- video switch -->
+      <button class="switch-btn ">
+        <span>
+          play
+        </span>
+        <span>
+          pause
+        </span>
+        <span class="switch switch-add"></span>
+      </button>
+    </header>
+
+
+
+
+  </body>
+</html>
